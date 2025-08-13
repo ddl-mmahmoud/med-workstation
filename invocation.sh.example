@@ -1,0 +1,2 @@
+#!/bin/bash -x
+time terraform "$@" -var email=YOUR_EMAIL_ADDRESS -var prefix=SHORT_ID_LIKE_YOUR_NAME -var public_key_path=PUBLIC_KEY_PATH -var private_key_path=PRIVATE_KEY_PATH -var 'cidrs=["YOUR_IP/32", "ANOTHER_IP/32"]'
