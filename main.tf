@@ -32,5 +32,5 @@ module "workstation_instance" {
 
 output "workstation_public_ip" {
   description = "Public IP"
-  value = module.selenium_grid_instance.public_ip
+  value = module.workstation_instance.public_ip
 }
