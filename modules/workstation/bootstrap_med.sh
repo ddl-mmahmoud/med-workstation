@@ -11,8 +11,8 @@ set -ex
 [ -d "$HOME/.pyenv" ] || curl -fsSL "https://pyenv.run" | bash -x
 (which tsh) || curl -fsSL "https://cdn.teleport.dev/install.sh" | bash -x -s 18.1.4
 (which helm) || curl -fsSL "https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3" | bash -x
-(which kubectl) || curl -L "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" | sudo tee /usr/local/bin/kubectl >/dev/null
-sudo chmod +x /usr/local/bin/kubectl
+(which kubectl) || { curl -L "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" | sudo tee /usr/local/bin/kubectl >/dev/null && sudo chmod +x /usr/local/bin/kubectl; }
+(which gh) || { curl -fsSL "https://github.com/cli/cli/releases/download/v2.76.2/gh_2.76.2_linux_amd64.tar.gz" | tar xvz --strip-components=2 gh_2.76.2_linux_amd64/bin/gh && sudo mv gh /usr/local/bin/gh; }
 
 [ -s "$HOME/.ssh/github" ] || ssh-keygen -f "$HOME/.ssh/github" -P "" -t ed25519
 
