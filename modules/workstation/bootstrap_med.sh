@@ -8,6 +8,8 @@ _clone () {
 
 set -ex
 
+ssh-keyscan -t rsa github.com >> "$HOME/.ssh/known_hosts"
+
 [ -d "$HOME/.pyenv" ] || curl -fsSL "https://pyenv.run" | bash -x
 (which tsh) || curl -fsSL "https://cdn.teleport.dev/install.sh" | bash -x -s 18.1.4
 (which helm) || curl -fsSL "https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3" | bash -x
