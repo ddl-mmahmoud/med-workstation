@@ -37,6 +37,10 @@ resource "aws_instance" "workstation-instance" {
   provisioner "remote-exec" {
     script = "modules/workstation/bootstrap.sh"
   }
+
+  provisioner "remote-exec" {
+    script = "modules/workstation/bootstrap_med.sh"
+  }
 }
 
 resource "aws_key_pair" "workstation-keypair" {
