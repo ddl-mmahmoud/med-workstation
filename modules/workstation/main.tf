@@ -19,6 +19,9 @@ resource "aws_instance" "workstation-instance" {
   tags = {
     Name = "Workstation ${var.name}"
     Owner = var.email
+    longTerm = true
+    deploy_type = "manual"
+    duration = "91+"
   }
   vpc_security_group_ids = [
     aws_security_group.workstation-sg.id,
