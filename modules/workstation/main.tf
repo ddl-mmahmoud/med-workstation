@@ -16,6 +16,11 @@ resource "aws_instance" "workstation-instance" {
   ami = var.ami-id
   instance_type = var.instance_type
   key_name = aws_key_pair.workstation-keypair.key_name
+
+  root_block_device {
+    volume_size = 30
+  }
+
   tags = {
     Name = "Workstation ${var.name}"
     Owner = var.email
