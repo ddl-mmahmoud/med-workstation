@@ -6,6 +6,10 @@ variable "private_key_path" {
   type = string
 }
 
+variable "github_pat_path" {
+  type = string
+}
+
 variable "prefix" {
   type = string
 }
@@ -27,6 +31,7 @@ module "workstation_instance" {
   workstation_ssh_key = "${file(var.public_key_path)}"
   private_ssh_key_path = var.private_key_path
   cidrs_with_access = var.cidrs
+  github_pat_path = var.github_pat_path
 }
 
 

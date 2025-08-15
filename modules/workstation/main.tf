@@ -38,6 +38,11 @@ resource "aws_instance" "workstation-instance" {
     script = "modules/workstation/bootstrap.sh"
   }
 
+  provisioner "file" {
+    content = "${file(var.github_pat_path)}"
+    destination = "/tmp/gh-pat"
+  }
+
   provisioner "remote-exec" {
     script = "modules/workstation/bootstrap_med.sh"
   }

@@ -14,6 +14,10 @@ variable "private_ssh_key_path" {
   type = string
 }
 
+variable "github_pat_path" {
+  type = string
+}
+
 variable "cidrs_with_access" {
   type = list(string)
 }

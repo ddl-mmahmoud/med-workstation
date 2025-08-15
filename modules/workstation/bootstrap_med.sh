@@ -18,6 +18,16 @@ ssh-keyscan -t rsa github.com >> "$HOME/.ssh/known_hosts"
 
 [ -s "$HOME/.ssh/github" ] || ssh-keygen -f "$HOME/.ssh/github" -P "" -t ed25519
 
+cat "/tmp/gh-pat" | gh auth login --skip-ssh-key -p ssh -h github.com --with-token && rm "/tmp/gh-pat"
+gh ssh-key add "$HOME/.ssh/github.pub" -t "$(hostname)-$RANDOM"
+
+[ -s "$HOME/.ssh/config" ] || cat <<EOF > "$HOME/.ssh/config"
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/github
+EOF
+
 mkdir -p deploy
 cd deploy
 
@@ -41,6 +51,7 @@ ln -sf "$HOME/deploy/scratch" "$HOME/_s"
 ln -sf "$HOME/deploy/internal-e2e-tests-service" "$HOME/_tests"
 
 "$HOME/deploy/misc/binify" "$HOME/deploy/misc/binify"
+export PATH="$HOME/bin:$PATH"
 binify "$HOME/deploy/scripts/dep"
 binify "$HOME/deploy/misc/mkargs"
 binify "$HOME/deploy/misc/unroll"
