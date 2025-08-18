@@ -16,6 +16,8 @@ ssh-keyscan -t rsa github.com >> "$HOME/.ssh/known_hosts"
 (which kubectl) || { curl -L "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" | sudo tee /usr/local/bin/kubectl >/dev/null && sudo chmod +x /usr/local/bin/kubectl; }
 (which gh) || { curl -fsSL "https://github.com/cli/cli/releases/download/v2.76.2/gh_2.76.2_linux_amd64.tar.gz" | tar xvz --strip-components=2 gh_2.76.2_linux_amd64/bin/gh && sudo mv gh /usr/local/bin/gh; }
 
+sudo apt install openjdk-11-jre
+
 [ -s "$HOME/.ssh/github" ] || {
     ssh-keygen -f "$HOME/.ssh/github" -P "" -t ed25519
     gh auth login --skip-ssh-key -p ssh -h github.com --with-token < /tmp/gh-pat && rm "/tmp/gh-pat"
@@ -57,3 +59,7 @@ binify "$HOME/deploy/scripts/dep"
 binify "$HOME/deploy/misc/mkargs"
 binify "$HOME/deploy/misc/unroll"
 binify "$HOME/deploy/misc/domclone"
+
+_clone cerebrotech internal-e2e-tests-service
+_clone cerebrotech domino-pytk
+_clone cerebrotech platform-apps
